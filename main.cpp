@@ -1,6 +1,11 @@
 #include<stdio.h>
 #include<iostream>
 #include<string>
+#include<iomanip>
+
+void propertypage();
+void filterpage();
+void bookingpage();
 
 int main(){
     int service;
@@ -10,14 +15,17 @@ int main(){
              <<"1. View all properties.\n"
              <<"2. Filter options.\n"
              <<"3. View my booking.\n"
-             <<"0. Exit.\n";
+             <<"0. Exit.\n"
+             <<"\n Enter you choice : ";
+
+        std::cin>>service;
 
         switch (service){
             case 1:
                 propertypage();
                 break;
             case 2:
-                filerpage();
+                filterpage();
                 break;
             case 3:
                 bookingpage();
@@ -44,6 +52,8 @@ struct Property{
     bool availability;
 };
 
+const int property_count=9;
+
 Property properties[property_count] = {
     {101, "Melaka Family Apartment", "Melaka", 180.00, 6, 3, 2,
      "Wi-Fi, air conditioning, kitchen, parking", true},
@@ -55,7 +65,7 @@ Property properties[property_count] = {
      "Wi-Fi, air conditioning, kitchen, parking, barbeque area", true},
     {105, "Spacious Luxury Holiday Home", "Pulau Penang", 400.00, 8, 5, 3,
      "Wi-Fi, air conditioning, kitchen, parking, swimming pool, gym, television", true},
-    {10, "The Homestay Helper", "Pulau Penang", 150.00, 3, 2, 1,
+    {106, "The Homestay Helper", "Pulau Penang", 150.00, 3, 2, 1,
      "Wi-Fi, air conditioning, parking", true},
     {108, "King Serve Airbnb", "Johor", 250.00, 4, 2, 1,
      "Wi-Fi, air conditioning, television, parking", true},
@@ -63,5 +73,24 @@ Property properties[property_count] = {
      "Wi-Fi, air conditioning, telecision", true},
     {110, "Nightstay in Skyline", "Kuala Lumpur", 450.00, 4, 2, 2,
      "Wi-Fi, air conditioning, kitchen, parking, swimming pool, gym", true},
+
+};
+
+void propertypage(){
+    std::cout<<"\n===All Properties===\n"
+             <<std::left<<std::setw(10)<<"ID"<<std::setw(30)<<"Property"<<std::setw(8)<<"Guests"<<std::setw(8)<<"Rooms"<<std::setw(10)<<"Toilets"<<std::setw(15)<<"Night (RM)"<<std::setw(15)<<"Availability"<<"\n";
+
+    for (int i = 0; i < property_count; i++)
+    {
+        std::cout<<std::left<<std::setw(10)<<properties[i].id<<std::setw(30)<<properties[i].name<<std::setw(8)<<properties[i].guest<<std::setw(8)<<properties[i].room<<std::setw(10)<<properties[i].toilet<<std::setw(15)<<properties[i].pricePnight<<std::setw(15)<<(properties[i].availability ? "Available" : "Booked")<<"\n";
+    }
+    
+}
+
+void filterpage(){
+
+}
+
+void bookingpage(){
 
 }
