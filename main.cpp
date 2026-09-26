@@ -107,6 +107,9 @@ int main(){
             case 3:
                 bookingpage();
                 break;
+            case 4:
+                helppage();
+                break;
             case 0:
                 std::cout<<"Thank you for choosing us. See you again!";
                 return 0;
