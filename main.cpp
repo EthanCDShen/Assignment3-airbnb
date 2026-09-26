@@ -77,13 +77,27 @@ Property properties[property_count] = {
 
 };
 
-void propertypage(){
-    std::cout<<"\n===All Properties===\n"
-             <<std::left<<std::setw(10)<<"ID"<<std::setw(30)<<"Property"<<std::setw(8)<<"Guests"<<std::setw(8)<<"Rooms"<<std::setw(10)<<"Toilets"<<std::setw(15)<<"Night (RM)"<<std::setw(15)<<"Availability"<<"\n";
+void propertypage(int guestfilter, int nightfilter, int roomfilter, int toiletfilter, int pricefilter){
+
+    if (guestfilter>0)
+    {
+        std::cout<<"\n===Filtered Option===\n";
+    }else{
+            std::cout<<"\n===All Properties===\n";
+    }
+    
+    std::cout<<std::left<<std::setw(10)<<"ID"<<std::setw(30)<<"Property"<<std::setw(8)<<"Guests"<<std::setw(8)<<"Rooms"
+             <<std::setw(10)<<"Toilets"<<std::setw(15)<<"Night (RM)"<<std::setw(15)<<"Availability"<<"\n";
 
     for (int i = 0; i < property_count; i++)
     {
-        std::cout<<std::left<<std::setw(10)<<properties[i].id<<std::setw(30)<<properties[i].name<<std::setw(8)<<properties[i].guest<<std::setw(8)<<properties[i].room<<std::setw(10)<<properties[i].toilet<<std::setw(15)<<properties[i].pricePnight<<std::setw(15)<<(properties[i].availability ? "Available" : "Booked")<<"\n";
+        if(guestfilter >0 && (!properties[i].availability || properties[i].guest <guestfilter || properties[i].room <roomfilter ||
+               properties[i].toilet <toiletfilter)){
+                continue;
+            }
+            
+        std::cout<<std::left<<std::setw(10)<<properties[i].id<<std::setw(30)<<properties[i].name<<std::setw(8)<<properties[i].guest<<std::setw(8)<<properties[i].room
+                 <<std::setw(10)<<properties[i].toilet<<std::setw(15)<<properties[i].pricePnight<<std::setw(15)<<(properties[i].availability ? "Available" : "Booked")<<"\n";
     }
 
     bool found = false;
@@ -192,24 +206,75 @@ void propertypage(){
 
 void filterpage(){
 
-    std::cout<<"\n===Filter Option===\n\n";
+    int guestfilter, nightfilter, roomfilter, toiletfilter, pricefilter;
 
-    std::cout<<"How many guest : ";
-    std::cin>>guestfilter;
+    std::cout<<"\n===Filter Option===\n";
 
-    std::cout<<"How many nights : ";
-    std::cin>>nightfilter;
-
-    std::cout<<"How many rooms : ";
-    std::cin>>roomfilter;
-
-    std::cout<<"How many toilets : ";
-    std::cin>>toiletfilter;
-
-    if (/*all condition true*/)
+    do
     {
-        /*show filtered property*/ 
-    }
+        std::cout<<"\nHow many guest (1-15) : ";
+        std::cin>>guestfilter;
+
+        if (guestfilter < 1 || guestfilter > 15)
+        {
+            std::cout<<"Invalid input. Enter number between 1 to 15.\n";
+        }
+        
+    } while (guestfilter < 1 || guestfilter > 15);
+    
+
+    do
+    {
+        std::cout<<"\nHow many nights (1-30) : ";
+        std::cin>>nightfilter;
+
+        if (nightfilter < 1 || nightfilter > 30)
+        {
+            std::cout<<"Invalid input. Enter number between 1 to 30.\n";
+        }
+        
+    } while (nightfilter < 1 || nightfilter > 30);
+
+
+    do
+    {
+        std::cout<<"\nHow many rooms (1-10) : ";
+        std::cin>>roomfilter;
+
+        if (roomfilter < 1 || roomfilter > 10)
+        {
+            std::cout<<"Invalid input. Enter number between 1 to 10.\n";
+        }
+        
+    } while (roomfilter < 1 || roomfilter > 10);
+
+
+    do
+    {
+        std::cout<<"\nHow many toilets (1-10) : ";
+        std::cin>>toiletfilter;
+
+        if (toiletfilter < 1 || toiletfilter > 10)
+        {
+            std::cout<<"Invalid input. Enter number between 1 to 10.\n";
+        }
+        
+    } while (toiletfilter < 1 || toiletfilter > 10);
+
+
+    do
+    {
+        std::cout<<"\nBudget (1-10) : ";
+        std::cin>>pricefilter;
+
+        if (pricefilter < 1 || pricefilter > 10)
+        {
+            std::cout<<"Invalid input. Enter number between 1 to 10.\n";
+        }
+        
+    } while (pricefilter < 1 || pricefilter > 10);
+
+    propertypage(guestfilter, nightfilter, roomfilter, toiletfilter, pricefilter);
     
 }
 
