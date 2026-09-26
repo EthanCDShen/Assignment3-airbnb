@@ -4,6 +4,56 @@
 #include<iomanip>
 #include<limits>
 
+struct Property{
+    int id;
+    std::string name;
+    std::string location;
+    double pricePnight;
+    int guest;
+    int room;
+    int toilet;
+    std::string facility;
+    bool availability;
+};
+
+const int property_count=9;
+
+Property properties[property_count] = {
+    {101, "Melaka Family Apartment", "Melaka", 180.00, 6, 3, 2,
+     "Wi-Fi, air conditioning, kitchen, parking", false},
+    {102, "Mykey Imperio", "Melaka", 160.00, 4, 3, 2,
+     "Wi-Fi, air conditioning, television, parking", true},
+    {103, "Backpackers Cozy Apartment", "Kuala Lumpur", 200.00, 4, 2, 1,
+     "Wi-Fi, air conditioning, swimming pool, parking", true},
+    {104, "Lisa Homestay", "Kuala Lumpur", 230.00, 6, 3, 2,
+     "Wi-Fi, air conditioning, kitchen, parking, barbeque area", true},
+    {105, "Spacious Luxury Holiday Home", "Pulau Penang", 400.00, 8, 5, 3,
+     "Wi-Fi, air conditioning, kitchen, parking, swimming pool, gym, television", true},
+    {106, "The Homestay Helper", "Pulau Penang", 150.00, 3, 2, 1,
+     "Wi-Fi, air conditioning, parking", true},
+    {108, "King Serve Airbnb", "Johor", 250.00, 4, 2, 1,
+     "Wi-Fi, air conditioning, television, parking", true},
+    {109, "Sky Loft Homestay", "Johor", 230.00, 5, 3, 2,
+     "Wi-Fi, air conditioning, telecision", true},
+    {110, "Nightstay in Skyline", "Kuala Lumpur", 450.00, 4, 2, 2,
+     "Wi-Fi, air conditioning, kitchen, parking, swimming pool, gym", true},
+
+};
+
+struct Booking{
+    int id;
+    int propertyIndex;
+    int guestNum;
+    int nightNum;
+    double totalPrice;
+    std::string status; 
+};
+
+const int max_booking=50;
+Booking bookings[max_booking];
+int booking_count=0;
+
+
 void propertypage(int guestfilter=0, int nightfilter=0, int roomfilter=0, int toiletfilter=0, int pricefilter=0);
 void filterpage();
 void bookingpage();
@@ -43,54 +93,6 @@ int main(){
     
 }
 
-struct Property{
-    int id;
-    std::string name;
-    std::string location;
-    double pricePnight;
-    int guest;
-    int room;
-    int toilet;
-    std::string facility;
-    bool availability;
-};
-
-const int property_count=9;
-
-Property properties[property_count] = {
-    {101, "Melaka Family Apartment", "Melaka", 180.00, 6, 3, 2,
-     "Wi-Fi, air conditioning, kitchen, parking", false},
-    {102, "Mykey Imperio", "Melaka", 160.00, 4, 3, 2,
-     "Wi-Fi, air conditioning, television, parking", true},
-    {103, "Backpackers Cozy Apartment", "Kuala Lumpur", 200.00, 4, 2, 1,
-     "Wi-Fi, air conditioning, swimming pool, parking", true},
-    {104, "Lisa Homestay", "Kuala Lumpur", 230.00, 6, 3, 2,
-     "Wi-Fi, air conditioning, kitchen, parking, barbeque area", true},
-    {105, "Spacious Luxury Holiday Home", "Pulau Penang", 400.00, 8, 5, 3,
-     "Wi-Fi, air conditioning, kitchen, parking, swimming pool, gym, television", true},
-    {106, "The Homestay Helper", "Pulau Penang", 150.00, 3, 2, 1,
-     "Wi-Fi, air conditioning, parking", true},
-    {108, "King Serve Airbnb", "Johor", 250.00, 4, 2, 1,
-     "Wi-Fi, air conditioning, television, parking", true},
-    {109, "Sky Loft Homestay", "Johor", 230.00, 5, 3, 2,
-     "Wi-Fi, air conditioning, telecision", true},
-    {110, "Nightstay in Skyline", "Kuala Lumpur", 450.00, 4, 2, 2,
-     "Wi-Fi, air conditioning, kitchen, parking, swimming pool, gym", true},
-
-};
-
-struct Booking{
-    int id;
-    int propertyIndex; // The position of the property in the properties array.
-    int guestNum;
-    int nightNum;
-    double totalPrice;
-    std::string status; // Current or Cancelled.
-};
-
-const int max_booking=50;
-Booking bookings[max_booking];
-int booking_count=0;
 
 int readnumber(){
     int number;
@@ -124,7 +126,7 @@ void propertypage(int guestfilter, int nightfilter, int roomfilter, int toiletfi
             std::cout<<"\n===Filtered Properties===\n"
                      <<"Guests: "<<guestfilter<<" | Nights: "<<nightfilter
                      <<" | Minimum rooms: "<<roomfilter<<" | Minimum toilets: "<<toiletfilter
-                     <<" | Maximum price/night: RM "<<pricefilter<<"\n";
+                     <<" | Maximum price/night: RM "<<pricefilter<<"\n\n";
         }else{
             std::cout<<"\n===All Properties===\n";
         }
