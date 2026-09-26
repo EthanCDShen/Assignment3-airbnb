@@ -1,4 +1,6 @@
-﻿* 53fe1e7 Update main.cpp
+﻿* da0d255 update property
+* 03a5058 Create gitlog.txt
+* 53fe1e7 Update main.cpp
 * 89651fd update structure
 * 0e46640 update booking feature
 * ea146d9 modify function for showing property
