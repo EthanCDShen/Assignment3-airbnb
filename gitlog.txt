@@ -1,4 +1,6 @@
-﻿* b41d8b5 Update gitlog.txt
+﻿* 302e1b9 Update help page function
+* fcc4d89 create help page
+* b41d8b5 Update gitlog.txt
 * da0d255 update property
 * 03a5058 Create gitlog.txt
 * 53fe1e7 Update main.cpp
