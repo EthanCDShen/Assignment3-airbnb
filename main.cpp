@@ -131,7 +131,6 @@ void propertypage(int guestfilter, int nightfilter, int roomfilter, int toiletfi
             std::cout<<"\n===All Properties===\n";
         }
 
-        // The heading and property rows are displayed together in this page.
         std::cout<<std::left<<std::setw(10)<<"ID"<<std::setw(30)<<"Property"
                  <<std::setw(8)<<"Guests"<<std::setw(8)<<"Rooms"<<std::setw(10)<<"Toilets"
                  <<std::setw(15)<<"Night (RM)"<<std::setw(15)<<"Availability";
@@ -143,7 +142,6 @@ void propertypage(int guestfilter, int nightfilter, int roomfilter, int toiletfi
         bool found=false;
 
         for(int i=0; i<property_count; i++){
-            // Skip unavailable properties and properties that fail any filter.
             if(guestfilter >0 && (!properties[i].availability ||
                properties[i].guest <guestfilter || properties[i].room <roomfilter ||
                properties[i].toilet <toiletfilter || properties[i].pricePnight >pricefilter)){
@@ -189,7 +187,6 @@ void propertypage(int guestfilter, int nightfilter, int roomfilter, int toiletfi
             continue;
         }
 
-        // A filtered booking must be selected from the displayed matches.
         if(guestfilter >0 && (!properties[index].availability ||
            properties[index].guest <guestfilter || properties[index].room <roomfilter ||
            properties[index].toilet <toiletfilter || properties[index].pricePnight >pricefilter)){
@@ -234,7 +231,6 @@ void propertypage(int guestfilter, int nightfilter, int roomfilter, int toiletfi
             continue;
         }
 
-        // Reuse the guests and nights entered on the filter page, if provided.
         int guestNum=guestfilter;
         int nightNum=nightfilter;
         int confirmbooking;
@@ -415,8 +411,7 @@ void bookingpage(){
             std::cout<<"You have no current bookings.\n";
         }
 
-        // Show the complete history below current bookings on the same page.
-        std::cout<<"\n===Booking History (Newest First)===\n\n";
+        std::cout<<"\n===Booking History===\n\n";
 
         if(booking_count ==0){
             std::cout<<"You have no booking history.\n";
@@ -478,7 +473,6 @@ void bookingpage(){
                 bookings[index].status="Cancelled";
                 std::cout<<"Booking cancelled.\n";
 
-                // Keep the history record and make the property available again.
                 properties[bookings[index].propertyIndex].availability=true;
             }else{
                 std::cout<<"No changes were made to the booking.\n";
