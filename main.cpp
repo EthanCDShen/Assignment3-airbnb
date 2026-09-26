@@ -4,9 +4,10 @@
 #include<iomanip>
 #include<limits>
 
-void propertypage();
+void propertypage(int guestfilter=0, int nightfilter=0, int roomfilter=0, int toiletfilter=0, int pricefilter=0);
 void filterpage();
 void bookingpage();
+int readnumber();
 
 int main(){
     int service;
@@ -77,6 +78,19 @@ Property properties[property_count] = {
      "Wi-Fi, air conditioning, kitchen, parking, swimming pool, gym", true},
 
 };
+
+struct Booking{
+    int id;
+    int propertyIndex; // The position of the property in the properties array.
+    int guestNum;
+    int nightNum;
+    double totalPrice;
+    std::string status; // Current or Cancelled.
+};
+
+const int max_booking=50;
+Booking bookings[max_booking];
+int booking_count=0;
 
 int readnumber(){
     int number;
@@ -372,15 +386,103 @@ void filterpage(){
 
 void bookingpage(){
     
-    std::cout<<"\n===Current Bookings===\n\n";
+    int bookingchoice;
 
-    if (/*have current booking*/)
-    {
-        /*show current booking*/
-    }else{
-        /*show no current booking*/
-        /*ask to booking now, route to view all property page*/
-    }
-    
+    do{
+        std::cout<<"\n===Current Bookings===\n\n";
+        bool found=false;
 
+        // Start from the newest booking and display only current bookings.
+        for(int i=booking_count-1; i>=0; i--){
+            if(bookings[i].status =="Current"){
+                if(!found){
+                    std::cout<<"Latest current booking:\n";
+                }
+
+                std::cout<<"Booking ID : "<<bookings[i].id<<"\n"
+                         <<"Property   : "<<properties[bookings[i].propertyIndex].name<<"\n"
+                         <<"Guests     : "<<bookings[i].guestNum<<"\n"
+                         <<"Nights     : "<<bookings[i].nightNum<<"\n"
+                         <<"Total      : RM "<<std::fixed<<std::setprecision(2)<<bookings[i].totalPrice<<"\n"
+                         <<"Status     : "<<bookings[i].status<<"\n\n";
+                found=true;
+            }
+        }
+
+        if(!found){
+            std::cout<<"You have no current bookings.\n";
+        }
+
+        // Show the complete history below current bookings on the same page.
+        std::cout<<"\n===Booking History (Newest First)===\n\n";
+
+        if(booking_count ==0){
+            std::cout<<"You have no booking history.\n";
+        }else{
+            for(int i=booking_count-1; i>=0; i--){
+                std::cout<<"Booking ID : "<<bookings[i].id<<"\n"
+                         <<"Property   : "<<properties[bookings[i].propertyIndex].name<<"\n"
+                         <<"Guests     : "<<bookings[i].guestNum<<"\n"
+                         <<"Nights     : "<<bookings[i].nightNum<<"\n"
+                         <<"Total      : RM "<<std::fixed<<std::setprecision(2)<<bookings[i].totalPrice<<"\n"
+                         <<"Status     : "<<bookings[i].status<<"\n\n";
+            }
+        }
+
+        std::cout<<"\n1. Cancel a booking.\n"
+                 <<"0. Back to main menu.\n"
+                 <<"\nEnter your choice : ";
+        bookingchoice=readnumber();
+
+        if(bookingchoice ==1){
+            if(!found){
+                std::cout<<"There are no current bookings to cancel.\n";
+                continue;
+            }
+
+            int bookingid;
+            int index=-1;
+            int confirm;
+
+            std::cout<<"Enter the current booking ID (0 to go back): ";
+            bookingid=readnumber();
+            if(bookingid ==0){
+                continue;
+            }
+
+            for(int i=0; i<booking_count; i++){
+                if(bookings[i].id ==bookingid && bookings[i].status =="Current"){
+                    index=i;
+                    break;
+                }
+            }
+
+            if(index ==-1){
+                std::cout<<"Current booking not found. Please use a booking ID from the list.\n";
+                continue;
+            }
+
+            std::cout<<"Property: "<<properties[bookings[index].propertyIndex].name<<"\n";
+            do{
+                std::cout<<"Cancel booking "<<bookingid<<"? (1 for yes, 0 for no): ";
+                confirm=readnumber();
+
+                if(confirm !=0 && confirm !=1){
+                    std::cout<<"Invalid choice. Enter 1 or 0.\n";
+                }
+            }while(confirm !=0 && confirm !=1);
+
+            if(confirm ==1){
+                bookings[index].status="Cancelled";
+                std::cout<<"Booking cancelled.\n";
+
+                // Keep the history record and make the property available again.
+                properties[bookings[index].propertyIndex].availability=true;
+            }else{
+                std::cout<<"No changes were made to the booking.\n";
+            }
+        }else if(bookingchoice !=0){
+            std::cout<<"Invalid choice. Enter 1 or 0.\n";
+        }
+    }while(bookingchoice !=0);
 }
