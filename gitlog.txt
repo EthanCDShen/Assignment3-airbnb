@@ -1,4 +1,5 @@
-﻿* da0d255 update property
+﻿* b41d8b5 Update gitlog.txt
+* da0d255 update property
 * 03a5058 Create gitlog.txt
 * 53fe1e7 Update main.cpp
 * 89651fd update structure

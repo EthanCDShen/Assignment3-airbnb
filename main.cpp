@@ -4,6 +4,7 @@
 #include<iomanip>
 #include<limits>
 
+// handle properties data
 struct Property{
     int id;
     std::string name;
@@ -18,6 +19,7 @@ struct Property{
 
 const int property_count=19;
 
+// properties data
 Property properties[property_count] = {
     {101, "Melaka Family Apartment", "Melaka", 180.00, 6, 3, 2,
      "Wi-Fi, air conditioning, kitchen, parking", false},
@@ -59,6 +61,7 @@ Property properties[property_count] = {
      "Wi-Fi, air conditioning, kitchen, parking, barbeque area, washing machine", true},
 };
 
+// handle bookings data
 struct Booking{
     int id;
     int propertyIndex;
@@ -77,7 +80,9 @@ void propertypage(int guestfilter=0, int nightfilter=0, int roomfilter=0, int to
 void filterpage();
 void bookingpage();
 int readnumber();
+void helppage();
 
+// user entry page
 int main(){
     int service;
 
@@ -86,6 +91,7 @@ int main(){
              <<"1. View all properties.\n"
              <<"2. Filter options.\n"
              <<"3. View my booking.\n"
+             <<"4. Help.\n"
              <<"0. Exit.\n"
              <<"\n Enter you choice : ";
 
@@ -112,7 +118,7 @@ int main(){
     
 }
 
-
+// handle every number input from user to check validity before saving data
 int readnumber(){
     int number;
     std::string remaining;
@@ -137,7 +143,7 @@ int readnumber(){
     }
 }
 
-
+// show properties, including filtered option. Let user able to book for hostel through this site
 void propertypage(int guestfilter, int nightfilter, int roomfilter, int toiletfilter, int pricefilter){
 
     while(true){
@@ -326,7 +332,7 @@ void propertypage(int guestfilter, int nightfilter, int roomfilter, int toiletfi
     }
 }
       
-
+// page for user to filter their preference 
 void filterpage(){
 
     int guestfilter, nightfilter, roomfilter, toiletfilter, pricefilter;
@@ -401,6 +407,7 @@ void filterpage(){
     
 }
 
+// page that show user's booking history, and current booking status
 void bookingpage(){
     
     int bookingchoice;
@@ -500,4 +507,32 @@ void bookingpage(){
             std::cout<<"Invalid choice. Enter 1 or 0.\n";
         }
     }while(bookingchoice !=0);
+}
+
+// instruction page for user to understand booking process, filter option and booking history
+void helppage(){
+    std::cout<<"\n===Help===\n\n"
+             <<"1. View all properties\n"
+             <<"   Enter a property ID to see its details. Choose 1 to book it.\n"
+             <<"   Enter your guests and nights, check the total, then confirm.\n\n"
+             <<"2. Filter options\n"
+             <<"   Enter guests, nights, minimum rooms and minimum toilets.\n"
+             <<"   Enter your maximum budget per night in RM using a whole number.\n"
+             <<"   Only available properties that meet every requirement are shown.\n"
+             <<"   Your guests and nights are reused when booking a filtered property.\n\n"
+             <<"3. View my booking\n"
+             <<"   Current bookings appear at the top, followed by the complete history.\n"
+             <<"   Both sections show the newest booking first.\n"
+             <<"   Choose 1 and enter a current booking ID to cancel, or 0 to go back.\n"
+             <<"   Cancellation makes the property available again and keeps its history.\n\n"
+             <<"- Use 0 to go back, or to exit from the main menu.\n"
+             <<"- Stays can be booked for 1 to 30 nights.\n"
+             <<"- Total price = price per night x number of nights.\n"
+             <<"- Availability uses Available/Booked status; there are no calendar dates.\n"
+             <<"- Bookings are stored only until you close the program.\n\n"
+             <<"Enter 0 to return to the main menu : ";
+    
+    while(readnumber() !=0){
+        std::cout<<"Enter 0 to return to the main menu : ";
+    }
 }
