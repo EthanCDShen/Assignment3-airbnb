@@ -16,7 +16,7 @@ struct Property{
     bool availability;
 };
 
-const int property_count=9;
+const int property_count=19;
 
 Property properties[property_count] = {
     {101, "Melaka Family Apartment", "Melaka", 180.00, 6, 3, 2,
@@ -36,8 +36,27 @@ Property properties[property_count] = {
     {109, "Sky Loft Homestay", "Johor", 230.00, 5, 3, 2,
      "Wi-Fi, air conditioning, telecision", true},
     {110, "Nightstay in Skyline", "Kuala Lumpur", 450.00, 4, 2, 2,
-     "Wi-Fi, air conditioning, kitchen, parking, swimming pool, gym", true},
-
+     "Wi-Fi, air conditioning, kitchen, parking, swimming pool, gym", false},
+    {111, "Riverside Cozy Studio", "Melaka", 120.00, 2, 1, 1,
+     "Wi-Fi, air conditioning, television, kitchenette", false},
+    {112, "Heritage Family House", "Melaka", 280.00, 8, 4, 3,
+     "Wi-Fi, air conditioning, kitchen, parking, washing machine", true},
+    {113, "City View Apartment", "Kuala Lumpur", 190.00, 4, 2, 2,
+     "Wi-Fi, air conditioning, kitchen, swimming pool, gym", false},
+    {114, "Sunrise Budget Room", "Kuala Lumpur", 80.00, 2, 1, 1,
+     "Wi-Fi, air conditioning, television", true},
+    {115, "Seaside Family Villa", "Pulau Penang", 550.00, 12, 6, 4,
+     "Wi-Fi, air conditioning, kitchen, parking, swimming pool, barbeque area", true},
+    {116, "Island Breeze Apartment", "Pulau Penang", 210.00, 5, 3, 2,
+     "Wi-Fi, air conditioning, kitchen, parking, balcony", false},
+    {117, "Green Garden Homestay", "Johor", 180.00, 6, 3, 2,
+     "Wi-Fi, air conditioning, kitchen, parking, garden", true},
+    {118, "Harbour View Suite", "Johor", 320.00, 7, 4, 3,
+     "Wi-Fi, air conditioning, kitchen, parking, swimming pool", true},
+    {119, "Highland Retreat House", "Pahang", 380.00, 10, 5, 3,
+     "Wi-Fi, kitchen, parking, water heater, balcony", true},
+    {120, "Lakeside Group Homestay", "Perak", 600.00, 15, 7, 5,
+     "Wi-Fi, air conditioning, kitchen, parking, barbeque area, washing machine", true},
 };
 
 struct Booking{
